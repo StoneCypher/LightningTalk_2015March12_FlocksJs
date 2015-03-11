@@ -1,0 +1,75 @@
+Hi.  I'm [[John Haugeland]], and I'm here to talk to you today about my idiot library [["Flocks."]]
+
+In this talk I'll tell you [[* why I prefer simplicity to features]], [[* why Flocks is different]], [+[* what it does]], show you [+[* a brief example]], and then [+[* show you where to find information]] if you're interested.
+
+(pause)
+
+
+
+
+[[# Why I prefer simplicity to features.]]
+
+TODO
+
+(pause)
+
+
+
+
+[[# Why Flocks is different.]]
+
+Flocks is an [[application layer]] for [+[React]].
+
+Flocks manages at least the [[rendering state]] of your application, though it can be convenient to use it to manage the complete [+[application state]], and I often do.
+
+The central goal of Flocks is [[EXTREME SIMPLICITY]].  And I'm not kidding.  There's only [[two functions]] and [+[one data member]] to learn, and then you're off to the races.  There are other tools in there, but you can wait until they're useful to you to learn them.
+
+Despite being simple, Flocks also gives you some things that Flux doesn't: centralization, atomicity, and transactionality.  I'll show you how momentarily.
+
+The way we do this is by making [[Flocks Controls]].  A Flocks Control is just something that has the [[Flocks Plumbing Mixin]], which is part of that setup housekeeping I mentioned was being hidden earlier.
+
+(pause)
+
+
+
+
+[[# What Flocks does.]]
+
+What flocks actually does is [[straightforward]].
+
+Most of it is [[hidden from you inside a mixin]], but it's written in a way that you can work directly with the Flocks datastructures if you want to.  This can be useful when metaprogramming.  That stuff is outside the scope of this talk.
+
+A flocks instance is created with a [[React control]] and a [+[mount point]], and whatever initial data you want to start your control with.  [+[code example]]  You don't have to use the Flocks createClass decorator; it's just convenient and low noise, which is good in a lightning talk.  That just adds the plumbing mixin.
+
+Calling that creator will return an object with some functions on it.  The only one I'll talk about today is "set", but there are a bunch of other useful things in there too, like locking, selective overwrite, path fetch, and whatever.  For this talk I'll call that object the [[Flocks Updater]].  Those functions are also available inside of [[Flocks Controls]] automatically.
+
+The Flocks instance has some stuff in a closure; the most interesting piece here is the [+[Flocks context]].  The Flocks context is your render state.  This encompasses what people generally use props, state, contexts, flux stores, and so forth to do.  The mindset is "if it gets rendered into the UI, then it's render state."  With that mindset, React fulfills its promise of being a dead simple, top down patch renderer for the DOM.
+
+The Flocks Updater operates on the Flocks Context.  Set, predictably, sets a value on the flocks context.  And that's actually a complete setup; when you use set, Flocks will turn around and re-mount and re-render for you.  Case closed.  We're done.
+
+(pause)
+
+
+
+
+[[# A brief example.]]
+
+Using the Flocks Context from inside a control is simple: it's just [[this.fctx]] on any Flocks Control.
+
+Similarly, using the Flocks Updater functions like set is similarly simple.  Set, for example, is [+[this.fset()]].
+
+So honestly, it's this simple:
+
+    [[spinner widget code example]]
+
+As you can see there are two buttons and a number.
+
+The number gets its value from the [+[{circle the flocks context}]] [+[Flocks Context]].
+
+Each button has an onclick which uses the [+[{circle the two set functions}]] [+[Flocks Updater set function]] to change the value.
+
+And the rest is just handled by re-mounting and the React diffing algorithm.  Nothing to learn, nothing to do, nothing to implement, no patterns to restructure your code around.  No dispatchers, no actions, no events, no stores.  No relationships.  No binding.
+
+Just set the data and let it play out declaratively.  Like a directed graph, or a spreadsheet.
+
+It's super, super liberating.
