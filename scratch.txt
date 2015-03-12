@@ -4,8 +4,11 @@ In this talk I'll tell you [[* why I prefer simplicity to features]], [[* why Fl
 
 (pause)
 
+.
 
+----
 
+.
 
 [[# Why I prefer simplicity to features.]]
 
@@ -13,8 +16,11 @@ TODO
 
 (pause)
 
+.
 
+----
 
+.
 
 [[# Why Flocks is different.]]
 
@@ -30,8 +36,11 @@ The way we do this is by making [[Flocks Controls]].  A Flocks Control is just s
 
 (pause)
 
+.
 
+----
 
+.
 
 [[# What Flocks does.]]
 
@@ -49,8 +58,11 @@ The Flocks Updater operates on the Flocks Context.  Set, predictably, sets a val
 
 (pause)
 
+.
 
+----
 
+.
 
 [[# A brief example.]]
 
@@ -72,4 +84,39 @@ And the rest is just handled by re-mounting and the React diffing algorithm.  No
 
 Just set the data and let it play out declaratively.  Like a directed graph, or a spreadsheet.
 
-It's super, super liberating.
+It's super liberating.
+
+.
+
+----
+
+.
+
+[[# Where to find information]]
+
+Wooo, I have a [[propaganda site]]!  It's [+[http://flocks.rocks/ {make this colorful}]].
+
+That has like dozens and dozens of [[* three examples]].  And more planned.  Also the [[* documentation]] and a few [[* introductory texts]] which I plan to expand.
+
+One of the examples - the site itself - is an [[* isomorphic app]], soon to be a [+[* --single-page-app--]], built in [+[* gulp]], which transforms [+[markdown to static html]], pipes it through [+[* twemoji]], builds [+[* sass]], [+[* closure compiles]], [+[* css uglifies]], pushes into [+[* s3]], and serves from [+[* cloudfront]].  The code is already on [+[* github]], the site is running, and a step by step tutorial showing how to build this from the ground up is on the way.  (pause)  [[* Tutorial (Promises, promises)]]
+
+I'm also on IRC in the currently empty [[freenode #flocksjs]] channel.
+
+.
+
+----
+
+.
+
+[[# What we learned]]
+
+[[... nothing `:D`]]
+
+[[* What is Flocks]]
+[+[* Why I prefer simple]]
+[+[* What makes Flocks different]]
+[+[* What Flocks does]]
+[+[* A brief example]]
+[+[* Where to find information]]
+
+I hope that was interesting.  Please enjoy your evening.
