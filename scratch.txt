@@ -32,7 +32,7 @@ The central goal of Flocks is [[EXTREME SIMPLICITY]].  And I'm not kidding.  The
 
 Despite being simple, Flocks also gives you some things that Flux doesn't: centralization, atomicity, and transactionality.  I'll show you how momentarily.
 
-The way we do this is by making [[Flocks Controls]].  A Flocks Control is just something that has the [[Flocks Plumbing Mixin]], which is part of that setup housekeeping I mentioned was being hidden earlier.
+I believe that complexity in the state layer is pernicious, the way the price of electricity is: it costs you at the factory, at the shipper, at the store, and at the home.  It's not a one time cost.  My goal is to reduce that complexity by as far as I know how.
 
 (pause)
 
@@ -48,7 +48,7 @@ What flocks actually does is [[straightforward]].
 
 Most of it is [[hidden from you inside a mixin]], but it's written in a way that you can work directly with the Flocks datastructures if you want to.  This can be useful when metaprogramming.  That stuff is outside the scope of this talk.
 
-A flocks instance is created with a [[React control]] and a [+[mount point]], and whatever initial data you want to start your control with.  [+[code example]]  You don't have to use the Flocks createClass decorator; it's just convenient and low noise, which is good in a lightning talk.  That just adds the plumbing mixin.
+A flocks instance is created with a [[React component]] and a [+[mount point]], and whatever initial data you want to start your control with.  [+[{{mount code example}}]]  You don't have to use the Flocks createClass decorator; it's just convenient and low noise, which is good in a lightning talk.  That just adds the plumbing mixin.
 
 Calling that creator will return an object with some functions on it.  The only one I'll talk about today is "set", but there are a bunch of other useful things in there too, like locking, selective overwrite, path fetch, and whatever.  For this talk I'll call that object the [[Flocks Updater]].  Those functions are also available inside of [[Flocks Controls]] automatically.
 
