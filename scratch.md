@@ -37,7 +37,7 @@ Flocks manages /at/ /least/ the `rendering state` of your application.  It can b
 
 The central goal of Flocks is `EXTREME SIMPLICITY`.  And I'm not kidding.  To get started there's only `two functions` and `+one data member` to learn, and then you're off to the races.  There are other tools in there too, but they can wait until they're useful.
 
-Despite being simple, Flocks also gives you some things that Flux doesn't: centralization, atomicity, and transactionality.  I'll show you how momentarily.
+Despite being simple, Flocks also gives you some things that Flux doesn't, such as centralization, atomicity, and transactionality.
 
 .
 
