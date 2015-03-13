@@ -16,8 +16,8 @@
         font-weight: 400;
         margin-bottom: 0;
       }
-      .remark-slide-content h1 { font-size: 3em; }
-      .remark-slide-content h2 { font-size: 1.7em; }
+      .remark-slide-content h1 { font-size: 3em; margin-top: 0; }
+      .remark-slide-content h2 { font-size: 1.5em; }
       .remark-slide-content h3 { font-size: 1.6em; }
       .footnote {
         position: absolute;
@@ -45,6 +45,11 @@
       }
       small code.remark-code {
         font-size: 80%;
+      }
+      small img {
+        width: 50%;
+        margin-top: -1em;
+        margin-left: 7.5em;
       }
       .remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; }
       .remark-code-line-highlighted     { background-color: #373832; }
@@ -118,6 +123,7 @@
         width: 20%;
         height: 92%;
         float: left;
+        padding-top: 0.7em;
       }
       .left-column h2:last-of-type, .left-column h3:last-child {
         color: #000;
@@ -802,7 +808,7 @@ layout: false
 
 template: inverse
 
-# Code example
+# Mounting example
 .footnote[Propaganda site: [flocks.rocks](https://flocks.rocks/)]
 
 
@@ -817,7 +823,184 @@ layout: false
   ## Prefer simple
   ## Why different
   ## What it does
-  ## Code example
+  ## Mount example
+]
+.right-column[
+
+<small>
+# Flocks config
+
+Tell `Flocks` what the root control is, and where to put it
+
+```javascript
+var FlocksConfig = { target: document.body, control: SpinnerApp };
+```
+</small>
+
+]
+.footnote[Propaganda site: [flocks.rocks](https://flocks.rocks/)]
+
+
+
+---
+
+
+
+layout: false
+.left-column[
+  ## In this talk
+  ## Prefer simple
+  ## Why different
+  ## What it does
+  ## Mount example
+]
+.right-column[
+
+<small>
+# Initial state
+
+The initial state for this app is just a zero for the spinner
+
+```javascript
+var FlocksConfig = { target: document.body, control: SpinnerApp };
+var InitialState = { value: 0 };
+```
+</small>
+
+]
+.footnote[Propaganda site: [flocks.rocks](https://flocks.rocks/)]
+
+
+
+---
+
+
+
+layout: false
+.left-column[
+  ## In this talk
+  ## Prefer simple
+  ## Why different
+  ## What it does
+  ## Mount example
+]
+.right-column[
+
+<small>
+# Time to mount
+
+Then we tell `Flocks` to mount
+
+```javascript
+var FlocksConfig = { target: document.body, control: SpinnerApp };
+var InitialState = { value: 0 };
+
+var Updater = window.flocksjs2.create(FlocksConfig, InitialState);
+
+// done
+```
+</small>
+
+]
+.footnote[Propaganda site: [flocks.rocks](https://flocks.rocks/)]
+
+
+
+---
+
+
+
+template: inverse
+
+# How does it work, then?
+
+
+
+---
+
+
+
+layout: false
+.left-column[
+  ## In this talk
+  ## Prefer simple
+  ## Why different
+  ## What it does
+  ## Mount example
+  ## Usage
+]
+.right-column[
+
+- `this.fctx`
+
+]
+.footnote[Propaganda site: [flocks.rocks](https://flocks.rocks/)]
+
+
+
+---
+
+
+
+layout: false
+.left-column[
+  ## In this talk
+  ## Prefer simple
+  ## Why different
+  ## What it does
+  ## Mount example
+  ## Usage
+]
+.right-column[
+
+- `this.fctx`
+
+- `this.fset`
+
+]
+.footnote[Propaganda site: [flocks.rocks](https://flocks.rocks/)]
+
+
+
+---
+
+
+
+layout: false
+.left-column[
+  ## In this talk
+  ## Prefer simple
+  ## Why different
+  ## What it does
+  ## Mount example
+  ## Usage
+]
+.right-column[
+
+- `this.fctx`
+
+- `this.fset`
+
+- Cross control is this simple:
+
+]
+.footnote[Propaganda site: [flocks.rocks](https://flocks.rocks/)]
+
+
+
+---
+
+
+
+layout: false
+.left-column[
+  ## In this talk
+  ## Prefer simple
+  ## Why different
+  ## What it does
+  ## Mount example
+  ## Usage
+  ## Spinner!
 ]
 .right-column[
 
@@ -855,8 +1038,174 @@ window.flocksjs2.create(FlocksConfig, InitialState);
 ```
 </small>
 
+
 ]
 .footnote[Propaganda site: [flocks.rocks](https://flocks.rocks/)]
+
+
+
+---
+
+
+
+layout: false
+.left-column[
+  ## In this talk
+  ## Prefer simple
+  ## Why different
+  ## What it does
+  ## Mount example
+  ## Usage
+  ## Spinner!
+]
+.right-column[
+# Which creates
+
+![](spinner_screen.png)
+
+]
+.footnote[Propaganda site: [flocks.rocks](https://flocks.rocks/)]
+
+
+
+---
+
+
+
+layout: false
+.left-column[
+  ## In this talk
+  ## Prefer simple
+  ## Why different
+  ## What it does
+  ## Mount example
+  ## Usage
+  ## Spinner!
+]
+.right-column[
+
+<small><small>
+```javascript
+
+// up button control
+var Up = React.createClass({
+  mixins: [ window.flocksjs2.member ],
+  inc:    function() { this.fset('value', this.fctx['value'] + 1) },
+  render: function() { return <button onClick={this.inc}>▲</button>; }
+});
+
+// down button control
+var Down = React.createClass({
+  mixins: [ window.flocksjs2.member ],
+  dec:    function() { this.fset('value', this.fctx['value'] - 1) },
+  render: function() { return <button onClick={this.dec}>▼</button>; }
+});
+
+// the application root control
+var SpinnerApp = React.createClass({
+  mixins: [ window.flocksjs2.member ],
+  render: function() { return <div><Up/>{this.fctx['value']}<Down/></div>; }
+});
+
+// telling flocks where to put the app control, and what that control is
+var FlocksConfig = { target: document.body, control: SpinnerApp };
+var InitialState = { value: 0 };
+
+// and mount the app
+window.flocksjs2.create(FlocksConfig, InitialState);
+
+// done!
+```
+</small></small>
+<small>
+![](spinner_screen.png)
+</small>
+
+]
+.footnote[Propaganda site: [flocks.rocks](https://flocks.rocks/)]
+
+
+
+---
+
+
+
+
+template: inverse
+
+# Where to get more information
+.footnote[Propaganda site: [flocks.rocks](https://flocks.rocks/)]
+
+
+
+
+
+
+---
+
+
+
+
+template: inverse
+
+# Where to get more information
+
+<div class="red" style="position: absolute; bottom: 2em; right: 3.5em; font-size: 250%;">&darr;</div>
+.footnote[Propaganda site: [flocks.rocks](https://flocks.rocks/)]
+
+
+
+---
+
+
+
+layout: false
+.left-column[
+  ## In this talk
+  ## Prefer simple
+  ## Why different
+  ## What it does
+  ## Mount example
+  ## Usage
+  ## Spinner!
+  ## More info
+]
+.right-column[
+
+- Woo, I have a propaganda site! [flocks.rocks](https://flocks.rocks/)
+
+]
+.footnote[Propaganda site: [flocks.rocks](https://flocks.rocks/)]
+
+
+
+---
+
+
+
+layout: false
+.left-column[
+  ## In this talk
+  ## Prefer simple
+  ## Why different
+  ## What it does
+  ## Mount example
+  ## Usage
+  ## Spinner!
+  ## More info
+]
+.right-column[
+
+- Woo, I have a propaganda site! [flocks.rocks](https://flocks.rocks/)
+
+- Get the code on Github: [flocks.rocks](https://flocks.rocks/)
+
+]
+.footnote[Propaganda site: [flocks.rocks](https://flocks.rocks/)]
+
+
+
+
 
 
 
